@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Meme Page Prototype</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="navigationbar.css" />
-</head>
-<body>
-    <div id="navbar">
-        <ul>
-            <li><a href="">test</a></li>
-            <li><a href="">home</a></li>
-            <li><a href="">login</a></li>
-        </ul>
-    </div>
-    <?php
-        require 'user.php';
-        $user = new User();
-        $user->userName = 'boi';
-        $user->login = 'geheim';
-        var_dump($user);
-        ?>
-</body>
-</html>
+<?php
+
+# lade composer autoloader:
+require_once(__DIR__.'/vendor/autoload.php');
+
+# setze Output-Type auf Plaintext, für debugging-Ausgabe:
+header('Content-Type: text/html');
+
+# extrahiere URL-Route:
+$path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/';
+echo "requested route: {$path_info}\n";
+echo "requested params: ".print_r($_REQUEST,true)."\n";
+
+# Teste Auto-Loading (siehe composer.json):
+$test = new M151\Test();
+$test->hello();
+
+
+
+include('router.php');
+$router = Router::getInstance();
+
+if(array_key_exists(strtolower($path_info), $router->router))
+    $controller = new $router->router[$path_info]();

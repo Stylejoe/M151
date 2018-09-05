@@ -1,0 +1,14 @@
+{
+    "name": "bzt-tg/modul151",
+    "description": "Web-MVC-Skeleton",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "M151\\": "src/classes/",
+            "Controller\\": "src/classes/Controller",
+            "Model\\": "src/classes/Model",
+            "View\\": "src/classes/View"
+        }
+    }
+}
