@@ -11,14 +11,15 @@ $path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/';
 echo "requested route: {$path_info}\n";
 echo "requested params: ".print_r($_REQUEST,true)."\n";
 
-# Teste Auto-Loading (siehe composer.json):
-$test = new M151\Test();
-$test->hello();
-
-
-
 include('router.php');
+include '../src/Application.php';
 $router = Router::getInstance();
+$conn = Application::getConn();
+
+if ($dbh) {
+    echo "Erfolg! Datenbankverbindung hergestellt";
+}
+    
 
 if(array_key_exists(strtolower($path_info), $router->router))
     $controller = new $router->router[$path_info]();
