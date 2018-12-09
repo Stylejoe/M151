@@ -1,18 +1,35 @@
 <?php
-include '..\\..\\DBConn\\dbconn.php';
+namespace Connection;
 
 class Application{
     
     private static $conn = null;
     public static function getConn()
     {
-        $dbContent = json_decode(file_get_contents('C:\\xampp\\DBConn\\dbconn.json'), true);
-        $dsn = $dbContent["dsn"];
-        //TODO: DBCONN
-
         if(Application::$conn == null)
-            Application::$conn = new \PDO($dsn, $username, $password, $options);
+            Application::$conn = Application::_inizializeDataBase();
 
         return Application::$conn;
+    }
+
+    private static function _inizializeDataBase()
+    {
+        //read and the decode the json file with the db informations
+        $file = file_get_contents('C:\\xampp\\DBConn\\dbconn.json');
+        $dbContent = json_decode($file,true);
+
+        $dsn = $dbContent["dsn"];
+        $username = $dbContent["username"];
+        $password = $dbContent["password"];
+        $options = $dbContent["options"];
+
+        try{
+            $conn = new \PDO($dsn, $username, $password, $options);
+        }
+        catch(PDOException $e){
+            echo 'Connection Failed';
+        }
+        //return new \PDO($dsn, $username, $password, $options);
+        return $conn;
     }
 }

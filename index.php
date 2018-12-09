@@ -12,15 +12,15 @@ echo "requested route: {$path_info}\n";
 echo "requested params: ".print_r($_REQUEST,true)."\n";
 
 include('router.php');
-//include '../src/Application.php';
 $router = Router::getInstance();
-//$conn = Application::getConn();
-$user = new Model\User();
+$conn = Connection\Application::getConn();
+$user = new Model\User("Test","pw");
 
-// if ($dbh) {
-//     echo "Erfolg! Datenbankverbindung hergestellt";
-// }
-    
+if ($conn) {
+    echo "Erfolg! Datenbankverbindung hergestellt";
+}    
 
 if(array_key_exists(strtolower($path_info), $router->router))
     $controller = new $router->router[$path_info]();
+else
+    echo "Key konnte ".$path_info." nicht gefunden werden";

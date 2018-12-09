@@ -8,7 +8,9 @@ class UserRepository extends Repository{
         if(UserRepository::$_instance == NULL)
             UserRepository::$_instance = new UserRepository();
         
-            UserRepository::$_instance->tableName = "user";
+        //table name
+        UserRepository::$_instance->tableName = "user";
+
         return UserRepository::$_instance;
     }
 
@@ -16,6 +18,7 @@ class UserRepository extends Repository{
         $sql = "Select * From User";
     }
     public function SelectById($Id){
+        $sql = "Select * From User where id = "+$Id;
 
     }
     public function Insert($entity){
