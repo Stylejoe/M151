@@ -1,8 +1,10 @@
 <?php
+namespace App;
+use Smarty;
 
 class TemplateEngine
 {
-    private static $_instance;
+    private static $_instance = null;
     private $smarty = null;
 
     private function __construct()
@@ -21,10 +23,10 @@ class TemplateEngine
 
     public static function getInstance()
     {
-        if(!static::$_inst)
+        if(static::$_instance == null)
         {
-            static::$_inst = new TemplateEngine();
+            static::$_instance = new TemplateEngine();
         }
-        return static::$_inst;
+        return static::$_instance;
     }
 }

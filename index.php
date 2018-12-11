@@ -12,15 +12,23 @@ echo "requested route: {$path_info}\n";
 echo "requested params: ".print_r($_REQUEST,true)."\n";
 
 include('router.php');
-$router = Router::getInstance();
-$conn = Connection\Application::getConn();
+
+$conn = App\Application::getConn();
 $user = new Model\User("Test","pw");
+//$te = App\TemplateEngine::getInstance();
 
 if ($conn) {
     echo "Erfolg! Datenbankverbindung hergestellt";
 }    
 
-if(array_key_exists(strtolower($path_info), $router->router))
-    $controller = new $router->router[$path_info]();
-else
-    echo "Key konnte ".$path_info." nicht gefunden werden";
+Router::addRoute('/', Controller\LoginController::class);
+Router::addRoute('/login', Controller\LoginController::class);
+
+$ctrl = Router::$Routes[0];
+
+$controller = new $ctrl['Controller']();
+
+// if(array_key_exists(strtolower($path_info), $router->router))
+//     $controller = new $router->router[$path_info]();
+// else
+//     echo "Key konnte ".$path_info." nicht gefunden werden";

@@ -5,12 +5,11 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "M151\\": "src/classes/",
+            "App\\": "src/classes",
             "Controller\\": "src/classes/Controller",
             "Model\\": "src/classes/Model",
             "View\\": "src/classes/View",
             "Repo\\": "src/classes/Model/Repository",
-            "Connection\\":"src/classes",
             "Smarty\\":"smarty"
         }
     }

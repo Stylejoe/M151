@@ -1,5 +1,5 @@
 <?php
-namespace Connection;
+namespace App;
 
 class Application{
     
@@ -21,10 +21,9 @@ class Application{
         $dsn = $dbContent["dsn"];
         $username = $dbContent["username"];
         $password = $dbContent["password"];
-        $options = $dbContent["options"];
 
         try{
-            $conn = new \PDO($dsn, $username, $password, $options);
+            $conn = new \PDO($dsn, $username, $password);
         }
         catch(PDOException $e){
             echo 'Connection Failed';
