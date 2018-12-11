@@ -5,6 +5,6 @@ use App\TemplateEngine;
 
 abstract class Controller{
 
-    protected $view;
-
+    public $view;
+    
 }

@@ -8,8 +8,14 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        $view = new LoginView();
-        $view->DisplayPage('login.html');
+        $this->view = new LoginView();
+    }
+
+    public function TryLogin()
+    {
+        $username = isset($_POST['login']) ? $_POST['login'] : "";
+        $pw = isset($_POST['password']) ? $_POST['password'] : "";
+
         
     }
 

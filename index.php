@@ -15,16 +15,6 @@ $path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/';
 
 //Add all possible routes to the Router
 Router::addRoute('/', Controller\LoginController::class);
-Router::addRoute('/login', Controller\LoginController::class, 'try_login');
+Router::addRoute('/login', Controller\LoginController::class, 'TryLogin');
 
-if(array_key_exists($path_info ,Router::$Routes))
-            $controller = new Router::$Routes[$path_info]['Controller']();
-        else
-        {
-            $content = array(
-                'url' => $path_info
-            );
-            $te = App\TemplateEngine::getInstance();
-            $te->smarty->assign($content);
-            $te->smarty->display('pageNotFound.html');
-        }
+Router::TryRoute($path_info);

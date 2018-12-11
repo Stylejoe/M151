@@ -4,6 +4,7 @@ use App\TemplateEngine;
 
 abstract class View{
 
+    protected $html;
     private $smarty;
 
     public function __construct()
@@ -16,9 +17,9 @@ abstract class View{
         $this->smarty->assign($content);
     }
 
-    public function DisplayPage($html)
+    public function DisplayPage()
     {
-        $this->smarty->display($html);
+        $this->smarty->display($this->html);
     }
 
 }
