@@ -2,15 +2,16 @@
     "name": "bzt-tg/modul151",
     "description": "Web-MVC-Skeleton",
     "type": "project",
-    "require": {},
+    "require": {
+        "smarty/smarty": "^3.1"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "src/classes",
             "Controller\\": "src/classes/Controller",
             "Model\\": "src/classes/Model",
             "View\\": "src/classes/View",
-            "Repo\\": "src/classes/Model/Repository",
-            "Smarty\\":"smarty"
+            "Repo\\": "src/classes/Model/Repository"
         }
     }
 }

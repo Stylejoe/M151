@@ -1,11 +1,10 @@
 <?php
 namespace App;
-use Smarty;
 
 class TemplateEngine
 {
     private static $_instance = null;
-    private $smarty = null;
+    public $smarty = null;
 
     private function __construct()
     {
@@ -15,7 +14,7 @@ class TemplateEngine
 
     private function loadConfig()
     {
-        $this->smarty->setTemplateDir(dirname(__FILE__).'templates/');
+        $this->smarty->setTemplateDir(dirname(__FILE__).'/View/templates/');
         $this->smarty->setCompileDir(dirname(__FILE__).'smartyCompile/');
         $this->smarty->setConfigDir(dirname(__FILE__).'configs/');
         $this->smarty->setCacheDir(dirname(__FILE__).'cache/');

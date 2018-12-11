@@ -15,7 +15,7 @@ include('router.php');
 
 $conn = App\Application::getConn();
 $user = new Model\User("Test","pw");
-//$te = App\TemplateEngine::getInstance();
+$te = App\TemplateEngine::getInstance();
 
 if ($conn) {
     echo "Erfolg! Datenbankverbindung hergestellt";
@@ -24,9 +24,7 @@ if ($conn) {
 Router::addRoute('/', Controller\LoginController::class);
 Router::addRoute('/login', Controller\LoginController::class);
 
-$ctrl = Router::$Routes[0];
-
-$controller = new $ctrl['Controller']();
+$controller = new Router::$Routes[$path_info]['Controller']();
 
 // if(array_key_exists(strtolower($path_info), $router->router))
 //     $controller = new $router->router[$path_info]();
