@@ -2,10 +2,7 @@
 
 namespace View;
 
-class LoginView
+class LoginView extends View
 {
-    public function __construct()
-    {
-        
-    }
+    
 }
