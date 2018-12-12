@@ -18,17 +18,22 @@ class Application{
         $file = file_get_contents('C:\\xampp\\DBConn\\dbconn.json');
         $dbContent = json_decode($file,true);
 
-        $dsn = $dbContent["dsn"];
+        $host = $dbContent["host"];
         $username = $dbContent["username"];
         $password = $dbContent["password"];
+        $dbname = $dbContent['dbname'];
 
         try{
-            $conn = new \PDO($dsn, $username, $password);
+            $conn = new \PDO($host, $username, $password);
         }
         catch(PDOException $e)
         {
             echo 'Connection Failed';
         }
+
+        $conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
+        $conn->query("use $dbname");
+        
         return $conn;
     }
 }

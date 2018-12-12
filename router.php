@@ -29,7 +29,7 @@ class Router
         else 
         {
             $content = array(
-                'url' => $path_info,
+                'url' => $path,
             );
             $te = App\TemplateEngine::getInstance();
             $te->smarty->assign($content);

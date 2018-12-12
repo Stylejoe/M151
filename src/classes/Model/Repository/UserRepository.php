@@ -19,6 +19,12 @@ class UserRepository extends Repository{
         $sql = $conn->prepare(
             'Select * From '.$tableName.' Where login = :login AND passwort = :password'
         );
+
+        $sql->execute(array(
+            ':login' => $username,
+            ':password' => $password
+        )
+        );
         
         
     }

@@ -9,9 +9,7 @@ $path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/';
 // echo "requested route: {$path_info}\n";
 // echo "requested params: ".print_r($_REQUEST,true)."\n";
 
-// if ($conn) {
-//     echo "Erfolg! Datenbankverbindung hergestellt";
-// }    
+App\Application::getConn();
 
 //Add all possible routes to the Router
 Router::addRoute('/', Controller\LoginController::class);
