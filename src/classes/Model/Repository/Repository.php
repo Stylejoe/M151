@@ -1,11 +1,19 @@
 <?php
 namespace Repo;
+use App\Application;
+
 abstract class Repository{
+    protected $conn;
     protected $tableName;
 
-    public abstract function SelectAll();
-    public abstract function SelectById($Id);
-    public abstract function Insert($entity);  
-    public abstract function Delete($entity);
-    public abstract function Update($entity);
+    public function __construct()
+    {
+        $conn = App\Application::getConn();
+    }
+
+    public static abstract function SelectAll();
+    public static abstract function Select($params);
+    public static abstract function Insert($entity);  
+    public static abstract function Delete($entity);
+    public static abstract function Update($entity);
 }

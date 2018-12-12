@@ -2,32 +2,33 @@
 namespace Repo;
 class UserRepository extends Repository{
 
-    private static $_instance;
-
-    public static function getInstance(){
-        if(UserRepository::$_instance == NULL)
-            UserRepository::$_instance = new UserRepository();
-        
-        //table name
-        UserRepository::$_instance->tableName = "user";
-
-        return UserRepository::$_instance;
+    public function __construct()
+    {
+        parent::__construct();
+        $tableName = 'user';
     }
 
-    public function SelectAll(){
+
+    public static function SelectAll(){
         $sql = "Select * From User";
     }
-    public function SelectById($Id){
-        $sql = "Select * From User where id = "+$Id;
+    public static function Select($params){
+        $username = $params['username'];
+        $password = $params['password'];
 
+        $sql = $conn->prepare(
+            'Select * From '.$tableName.' Where login = :login AND passwort = :password'
+        );
+        
+        
     }
-    public function Insert($entity){
+    public static function Insert($entity){
 
     } 
-    public function Delete($entity){
+    public static function Delete($entity){
 
     }
-    public function Update($entity){
+    public static function Update($entity){
 
     }
 

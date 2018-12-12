@@ -25,10 +25,10 @@ class Application{
         try{
             $conn = new \PDO($dsn, $username, $password);
         }
-        catch(PDOException $e){
+        catch(PDOException $e)
+        {
             echo 'Connection Failed';
         }
-        //return new \PDO($dsn, $username, $password, $options);
         return $conn;
     }
 }
