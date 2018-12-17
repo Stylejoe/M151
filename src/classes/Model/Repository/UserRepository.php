@@ -34,7 +34,7 @@ class UserRepository extends Repository{
         
         
     }
-    public function Insert(User $entity){
+    public function Insert($entity){
         $username = $entity->userName;
         $password = $entity->password;
 
