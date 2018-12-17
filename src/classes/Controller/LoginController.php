@@ -51,4 +51,18 @@ class LoginController extends Controller
         }
     }
 
+    private function LoginDataIsValid($username, $password)
+    {
+        if ( strlen($password) < 8 ||
+            !preg_match('/[A-Z]/',$password) ||
+            !preg_match('/[\W]/', $password)
+        )
+        {
+            $this->view->SetContent(array(
+                'message' => "The Password doesn't match our Security Guidelines"
+            ));
+            return false;
+        }
+    }
+
 }
