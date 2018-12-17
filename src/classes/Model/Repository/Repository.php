@@ -13,8 +13,6 @@ abstract class Repository{
     }
 
     public static abstract function getInstance();
-    public abstract function SelectAll();
-    public abstract function Select($params);
     public abstract function Insert($entity);  
     public abstract function Delete($entity);
     public abstract function Update($entity);

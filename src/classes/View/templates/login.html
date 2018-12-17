@@ -5,14 +5,14 @@
 
 <body>
     <div>
-        <form method="POST" >
+        <form method="POST">
                 <input type="text" placeholder="Login" name="login"/>
                 <input type="password" placeholder="Password" name="password"/>
             
                 <input type="submit" formaction="login" value="Login" name="loginButton"/>
                 <input type="submit" formaction="register" value="Register" name="registerButton"/>
-        </form>
-        {include file='error.html'}       
+        </form>           
     </div>   
+    {include file='message.html'}   
 </body>
 </html>

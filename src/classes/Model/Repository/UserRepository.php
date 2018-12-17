@@ -16,24 +16,6 @@ class UserRepository extends Repository{
         return static::$_instance;
     }
 
-    public function SelectAll(){
-        $sql = "Select * From User";
-    }
-    public function Select($params){
-        $username = $params['username'];
-        $password = $params['password'];
- 
-        $sql = $this->conn->prepare(
-            'Select * From '.$this->tableName.' Where username = :username AND password_hash = :password'
-        );
-        $sql->execute(array(
-            ':username' => $username,
-            ':password' => $password
-        ));
-        
-        
-        
-    }
     public function Insert($entity){
         $username = $entity->userName;
         $password = $entity->password;
@@ -41,7 +23,7 @@ class UserRepository extends Repository{
         $sql = $this->conn->prepare(
             'INSERT INTO '.$this->tableName.' username, password_hash VALUES(:username, :password)'
         );
-        $sql->execute(array(
+        return $sql->execute(array(
             ':username' => $username,
             ':password' => $password
         ));
@@ -51,6 +33,24 @@ class UserRepository extends Repository{
     }
     public function Update($entity){
 
+    }
+  
+    public function SelectAll(){
+        $sql = "Select * From ".$this->tableName;
+    }
+    public function Select($params){
+        $username = $params['username'];
+        $password = $params['password'];
+ 
+        $sql = $this->conn->prepare(
+            'Select * From '.$this->tableName.' Where username = :username AND password_hash = :password'
+        );
+        $stmt = $sql->execute(array(
+            ':username' => $username,
+            ':password' => $password
+        ));
+        
+        return $stmt;
     }
 
 }

@@ -10,6 +10,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->view = new LoginView();
+        $this->repository = UserRepository::getInstance();
     }
 
     public function TryLogin()
@@ -21,7 +22,7 @@ class LoginController extends Controller
             'username' => $username,
             'password' => $pw
         );
-        UserRepository::getInstance()->Select($params);
+        $this->repository->Select($params);
         
     }
 
@@ -36,6 +37,8 @@ class LoginController extends Controller
 
     private function LoginDataIsValid($username, $password)
     {
+        
+        //Atleast 8 characters with a special and an uppercase character
         if ( strlen($password) < 8 ||
             !preg_match('/[A-Z]/',$password) ||
             !preg_match('/[\W]/', $password)
