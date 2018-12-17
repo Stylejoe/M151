@@ -14,5 +14,6 @@ App\Application::getConn();
 //Add all possible routes to the Router
 Router::addRoute('/', Controller\LoginController::class);
 Router::addRoute('/login', Controller\LoginController::class, 'TryLogin');
+Router::addRoute('/register', Controller\LoginController::class, 'Register');
 
 Router::TryRoute($path_info);

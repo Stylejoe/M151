@@ -1,40 +1,55 @@
 <?php 
 namespace Repo;
+use Model\User;
 class UserRepository extends Repository{
+    private static $_instance=null;
 
-    public function __construct()
+    private function __construct()
     {
-        parent::__construct();
-        $tableName = 'user';
+        parent::__construct('user');
     }
 
+    public static function getInstance()
+    {
+        if(static::$_instance == null)
+            static::$_instance = new UserRepository();
+        return static::$_instance;
+    }
 
-    public static function SelectAll(){
+    public function SelectAll(){
         $sql = "Select * From User";
     }
-    public static function Select($params){
+    public function Select($params){
         $username = $params['username'];
         $password = $params['password'];
-
-        $sql = $conn->prepare(
-            'Select * From '.$tableName.' Where login = :login AND passwort = :password'
+ 
+        $sql = $this->conn->prepare(
+            'Select * From '.$this->tableName.' Where username = :username AND password_hash = :password'
         );
-
         $sql->execute(array(
-            ':login' => $username,
+            ':username' => $username,
             ':password' => $password
-        )
+        ));
+        
+        
+        
+    }
+    public function Insert(User $entity){
+        $username = $entity->userName;
+        $password = $entity->password;
+
+        $sql = $this->conn->prepare(
+            'INSERT INTO '.$this->tableName.' username, password_hash VALUES(:username, :password)'
         );
-        
-        
-    }
-    public static function Insert($entity){
-
+        $sql->execute(array(
+            ':username' => $username,
+            ':password' => $password
+        ));
     } 
-    public static function Delete($entity){
+    public function Delete($entity){
 
     }
-    public static function Update($entity){
+    public function Update($entity){
 
     }
 

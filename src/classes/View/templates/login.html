@@ -5,15 +5,13 @@
 
 <body>
     <div>
-            <form action="login" method="POST" >
-                    <input type="text" placeholder="Login" name="login"/>
-                    <input type="password" placeholder="Password" name="password"/>
+        <form method="POST" >
+                <input type="text" placeholder="Login" name="login"/>
+                <input type="password" placeholder="Password" name="password"/>
             
-                    <input type="submit" value="Login" name="loginButton"/>
-                    <input type="submit" value="Register" name="registerButton"/>
-                </form>   
-    </div>
-    
-    
+                <input type="submit" formaction="login" value="Login" name="loginButton"/>
+                <input type="submit" formaction="register" value="Register" name="registerButton"/>
+        </form>       
+    </div>   
 </body>
 </html>

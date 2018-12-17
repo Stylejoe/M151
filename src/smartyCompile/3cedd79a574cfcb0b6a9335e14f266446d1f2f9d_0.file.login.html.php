@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2018-12-11 21:15:09
+/* Smarty version 3.1.33, created on 2018-12-14 15:19:25
   from 'C:\xampp\htdocs\src\classes\View\templates\login.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c101acd9ab850_79965480',
+  'unifunc' => 'content_5c13bbed434f46_84621693',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3cedd79a574cfcb0b6a9335e14f266446d1f2f9d' => 
     array (
       0 => 'C:\\xampp\\htdocs\\src\\classes\\View\\templates\\login.html',
-      1 => 1544559307,
+      1 => 1544797161,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:header.html' => 1,
   ),
 ),false)) {
-function content_5c101acd9ab850_79965480 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5c13bbed434f46_84621693 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
 
@@ -30,16 +30,16 @@ function content_5c101acd9ab850_79965480 (Smarty_Internal_Template $_smarty_tpl)
 
 <body>
     <div>
-            <form action="login" method="POST" >
-                    <input type="text" placeholder="Login" name="login"/>
-                    <input type="password" placeholder="Password" name="password"/>
+        <form method="POST" >
+                <input type="text" placeholder="Login" name="login"/>
+                <input type="password" placeholder="Password" name="password"/>
             
-                    <input type="submit" value="Login" name="loginButton"/>
-                    <input type="submit" value="Register" name="registerButton"/>
-                </form>   
-    </div>
-    
-    
+                <input type="submit" formaction="login" value="Login" name="loginButton"/>
+                <input type="submit" formaction="register" value="Register" name="registerButton"/>
+        </form>
+        <p><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</p>  
+    </div>   
 </body>
 </html><?php }
 }

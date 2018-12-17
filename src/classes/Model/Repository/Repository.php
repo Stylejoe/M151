@@ -6,14 +6,16 @@ abstract class Repository{
     protected $conn;
     protected $tableName;
 
-    public function __construct()
+    protected function __construct($tableName)
     {
-        $conn = App\Application::getConn();
+        $this->conn = Application::getConn();
+        $this->tableName = $tableName;
     }
 
-    public static abstract function SelectAll();
-    public static abstract function Select($params);
-    public static abstract function Insert($entity);  
-    public static abstract function Delete($entity);
-    public static abstract function Update($entity);
+    public static abstract function getInstance();
+    public abstract function SelectAll();
+    public abstract function Select($params);
+    public abstract function Insert($entity);  
+    public abstract function Delete($entity);
+    public abstract function Update($entity);
 }
