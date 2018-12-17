@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         $params = array(
             'username' => $username,
-            'password' => $pw 
+            'password' => $pw
         );
         UserRepository::getInstance()->Select($params);
         
@@ -30,7 +30,22 @@ class LoginController extends Controller
         $username = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : "";
         $pw = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : "";
 
-        
+        $this->LoginDataIsValid($username,$pw);
+        $this->view->DisplayPage();
+    }
+
+    private function LoginDataIsValid($username, $password)
+    {
+        if ( strlen($password) < 8 ||
+            !preg_match('/[A-Z]/',$password) ||
+            !preg_match('/[\W]/', $password)
+        )
+        {
+            $this->view->SetContent(array(
+                'message' => "The Password doesn't match our Security Guidelines"
+            ));
+            return false;
+        }
     }
 
 }
