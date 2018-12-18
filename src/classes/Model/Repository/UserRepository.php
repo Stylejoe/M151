@@ -1,6 +1,7 @@
 <?php 
 namespace Repo;
 use Model\User;
+
 class UserRepository extends Repository{
     private static $_instance=null;
 
@@ -21,7 +22,7 @@ class UserRepository extends Repository{
         $password = $entity->password;
 
         $sql = $this->conn->prepare(
-            'INSERT INTO '.$this->tableName.' username, password_hash VALUES(:username, :password)'
+            'INSERT INTO '.$this->tableName.' (username, password_hash) VALUES(:username, :password)'
         );
         return $sql->execute(array(
             ':username' => $username,
@@ -34,23 +35,16 @@ class UserRepository extends Repository{
     public function Update($entity){
 
     }
-  
-    public function SelectAll(){
-        $sql = "Select * From ".$this->tableName;
-    }
-    public function Select($params){
-        $username = $params['username'];
-        $password = $params['password'];
+
+    public function GetHashByLogin($username){
  
         $sql = $this->conn->prepare(
-            'Select * From '.$this->tableName.' Where username = :username AND password_hash = :password'
+            'Select * From '.$this->tableName.' Where username = :username'
         );
-        $stmt = $sql->execute(array(
-            ':username' => $username,
-            ':password' => $password
+        $sql->execute(array(
+            ':username' => $username
         ));
-        
-        return $stmt;
+        return $sql->fetch(\PDO::FETCH_ASSOC);
     }
 
 }

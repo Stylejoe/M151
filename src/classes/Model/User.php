@@ -5,7 +5,8 @@ class User{
 
     public $userName;
     public $password;
-    public $erstellungsDatum;
+    public $email;
+    public $created_at;
 
     public function __construct($userName, $password)
     {

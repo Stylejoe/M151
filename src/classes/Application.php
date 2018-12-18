@@ -26,6 +26,7 @@ class Application{
         try{
             $conn = new \PDO($host, $username, $password);
 
+            //Create the whole database structure, if it's not available
             $conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
             $conn->query("use $dbname");
 
@@ -33,7 +34,7 @@ class Application{
                 userId INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(255) NOT NULL,
                 password_hash VARCHAR(255) NOT NULL,
-                email VARCHAR(255) NOT NULL,
+                email VARCHAR(255) DEFAULT '',
                 created_at TIMESTAMP NOT NULL
             )");
 
@@ -52,6 +53,7 @@ class Application{
                 content VARCHAR(400) NOT NULL,
                 created_at TIMESTAMP NOT NULL    
             )");
+
         }
         catch(PDOException $e)
         {

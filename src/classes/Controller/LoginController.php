@@ -4,6 +4,7 @@ namespace Controller;
 use View\LoginView;
 use App\TemplateEngine;
 use Repo\UserRepository;
+use Model\User;
 
 class LoginController extends Controller
 {
@@ -15,54 +16,67 @@ class LoginController extends Controller
 
     public function TryLogin()
     {
-        $username = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : "";
-        $pw = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : "";
+        $username; $password;
+        $username = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : null;
+        $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
 
-        $params = array(
-            'username' => $username,
-            'password' => $pw
-        );
-        $this->repository->Select($params);
-        
+        $row = $this->repository->GetHashByLogin($username);
+
+        if( $row && password_verify($password, $row['password_hash']))
+            header('Location: /home');
+        else{
+            $this->view->SetContent(array(
+                'message' => "Login Failed! Wrong username or password."
+            ));
+            $this->view->DisplayPage();   
+        }             
     }
 
     public function Register()
     {
-        $username = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : "";
-        $pw = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : "";
+        $username = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : null;
+        $pw = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
 
-        $this->LoginDataIsValid($username,$pw);
-        $this->view->DisplayPage();
+        //Validate the username and password
+        if($this->LoginDataIsValid($username,$pw)){
+
+            $user = new User($username, password_hash($pw, PASSWORD_DEFAULT));
+            if($this->repository->Insert($user))
+            {
+                $this->view->SetContent(array(
+                    'message' => "Registration Successful"
+                ));
+            }               
+        }
+        else {
+            $this->view->DisplayPage();
+        }   
     }
 
     private function LoginDataIsValid($username, $password)
     {
-        
+        $message = null;
+        if(empty($username) || empty($password))
+            $message .= "One or more of the required input fields are empty! <br> ";          
+
         //Atleast 8 characters with a special and an uppercase character
         if ( strlen($password) < 8 ||
             !preg_match('/[A-Z]/',$password) ||
             !preg_match('/[\W]/', $password)
         )
+            $message .= "Your Password doesn't match our Security Guidelines! <br>";
+
+        //if the sql select returns true, there has to be a user with the same loginname
+        if($this->repository->GetHashByLogin($username))
+            $message .= "The username ".$username." is already taken <br>";
+
+        if($message)
         {
             $this->view->SetContent(array(
-                'message' => "The Password doesn't match our Security Guidelines"
+                'message' => $message
             ));
             return false;
         }
+        return true;
     }
-
-    private function LoginDataIsValid($username, $password)
-    {
-        if ( strlen($password) < 8 ||
-            !preg_match('/[A-Z]/',$password) ||
-            !preg_match('/[\W]/', $password)
-        )
-        {
-            $this->view->SetContent(array(
-                'message' => "The Password doesn't match our Security Guidelines"
-            ));
-            return false;
-        }
-    }
-
 }
