@@ -3,6 +3,7 @@ namespace Model;
 
 class User{
 
+    public $id;
     public $userName;
     public $password;
     public $email;

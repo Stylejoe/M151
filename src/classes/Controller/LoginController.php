@@ -2,7 +2,7 @@
 namespace Controller;
 
 use View\LoginView;
-use App\TemplateEngine;
+use App\SessionHandler;
 use Repo\UserRepository;
 use Model\User;
 
@@ -23,7 +23,11 @@ class LoginController extends Controller
         $row = $this->repository->GetHashByLogin($username);
 
         if( $row && password_verify($password, $row['password_hash']))
+        {
+            $user = new User($row['username'], $row['password_hash']);
+            SessionHandler::StartSession($user);
             header('Location: /home');
+        }         
         else{
             $this->view->SetContent(array(
                 'message' => "Login Failed! Wrong username or password."
@@ -48,9 +52,7 @@ class LoginController extends Controller
                 ));
             }               
         }
-        else {
-            $this->view->DisplayPage();
-        }   
+        $this->view->DisplayPage();
     }
 
     private function LoginDataIsValid($username, $password)
