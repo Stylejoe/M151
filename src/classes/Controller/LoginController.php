@@ -20,12 +20,12 @@ class LoginController extends Controller
         $username = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : null;
         $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
 
-        $row = $this->repository->GetHashByLogin($username);
+        $user = $this->repository->GetUserByName($username);
 
-        if( $row && password_verify($password, $row['password_hash']))
+        //see if the row contains something, if yes compare the hash
+        if( $user && password_verify($password, $user->password))
         {
-            $user = new User($row['username'], $row['password_hash']);
-            SessionHandler::StartSession($user);
+            SessionHandler::Login($user);
             header('Location: /home');
         }         
         else{
@@ -69,7 +69,7 @@ class LoginController extends Controller
             $message .= "Your Password doesn't match our Security Guidelines! <br>";
 
         //if the sql select returns true, there has to be a user with the same loginname
-        if($this->repository->GetHashByLogin($username))
+        if($this->repository->GetUserByName($username))
             $message .= "The username ".$username." is already taken <br>";
 
         if($message)

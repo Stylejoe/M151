@@ -8,5 +8,6 @@ class HomeView extends View
     {
         parent::__construct();
         $this->html = 'home.html';
+        $this->needsLogin = true;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+use App\SessionHandler;
 class Router
 {
     public static $Routes = array();
@@ -21,7 +21,11 @@ class Router
             $controller = new static::$Routes[$path]['Controller']();
             $method = static::$Routes[$path]['Method'];
 
-            if ($method != '') 
+            //Controll if the view needs a login and if the session is already running
+            if($controller->view->needsLogin && !SessionHandler::isLoggedIn())
+                header('Location: /');
+
+            if ($method) 
                 $controller->$method();
             else 
                 $controller->view->DisplayPage();

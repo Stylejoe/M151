@@ -4,8 +4,9 @@ use App\TemplateEngine;
 
 abstract class View{
 
-    protected $html;
     private $smarty;
+    protected $html;
+    public $needsLogin;
 
     public function __construct()
     {

@@ -2,18 +2,18 @@
 namespace Repo;
 use Model\User;
 
-class UserRepository extends Repository{
+class HomeRepository extends Repository{
     private static $_instance=null;
 
     protected function __construct()
     {
-        parent::__construct('user');
+        parent::__construct('upload');
     }
 
     public static function getInstance()
     {
         if(static::$_instance == null)
-            static::$_instance = new UserRepository();
+            static::$_instance = new HomeRepository();
         return static::$_instance;
     }
 

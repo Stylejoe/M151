@@ -8,5 +8,6 @@ class LoginView extends View
     {
         parent::__construct();
         $this->html = 'login.html';
+        $this->needsLogin = false;
     }
 }

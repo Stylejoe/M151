@@ -8,11 +8,11 @@
         <form method="POST" class="form-group">
                 <input type="text" class="form-control" placeholder="Login" name="login"/>
                 <input type="password" class="form-control" placeholder="Password" name="password"/>
-            
+
+                {include file='message.html'}  
                 <input type="submit" class="btn btn-primary" formaction="login" value="Login" name="loginButton"/>
                 <input type="submit" class="btn btn-primary" formaction="register" value="Register" name="registerButton"/>
         </form>           
-    </div>   
-    {include file='message.html'}   
+    </div>       
 </body>
 </html>
