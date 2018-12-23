@@ -7,10 +7,12 @@ abstract class View{
     private $smarty;
     protected $html;
     public $needsLogin;
+    public $controller;
 
-    public function __construct()
+    public function __construct($controller)
     {
         $this->smarty = TemplateEngine::getInstance()->smarty;
+        $this->controller = $controller;
     }
 
     public function SetContent($content)

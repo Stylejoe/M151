@@ -1,15 +1,15 @@
 <?php
-/* Smarty version 3.1.33, created on 2018-12-23 09:22:19
+/* Smarty version 3.1.33, created on 2018-12-23 09:47:15
   from 'C:\xampp\htdocs\src\classes\View\templates\navbar.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5c1f45bbdde0f1_64868235',
+  'unifunc' => 'content_5c1f4b939b9226_40845932',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'a5012845c88ac450659c9583eb6ccf112932a1b1' => 
+    'e2551333d51e760cd1d4b88f9ff94b5e68dd9ad5' => 
     array (
       0 => 'C:\\xampp\\htdocs\\src\\classes\\View\\templates\\navbar.html',
       1 => 1545552181,
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5c1f45bbdde0f1_64868235 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5c1f4b939b9226_40845932 (Smarty_Internal_Template $_smarty_tpl) {
 ?><nav class="navbar navbar-expand-sm navbar-dark bg-primary">
     <a class="navbar-brand" href="/home">Media Center</a>
     <div class="collapse navbar-collapse">

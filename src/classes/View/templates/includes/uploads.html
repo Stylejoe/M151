@@ -1,0 +1,14 @@
+{foreach from=$uploads item=upload}
+            <div class="card" style="width: 30rem;">           
+                <div class="card-body">
+                    <h4 class="card-title">{$upload->title}</h4>
+                    <img src="{$upload->srcPath}" class="card-img-top">
+                    <p class="card-text">{$upload->description}</p>
+                    <a href="/home?mediaId={$upload->id}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+            <br>
+            {if isset($comments)}
+                {include file='comments.html'}
+            {/if}
+{/foreach}

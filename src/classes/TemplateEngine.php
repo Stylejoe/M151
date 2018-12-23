@@ -15,6 +15,7 @@ class TemplateEngine
     private function setDirs()
     {
         $this->smarty->setTemplateDir(dirname(__FILE__).'/View/templates/');
+        $this->smarty->addTemplateDir(dirname(__FILE__).'/View/templates/includes');
         $this->smarty->setCompileDir(dirname(__FILE__).'/../smartyCompile/');
         $this->smarty->setConfigDir(dirname(__FILE__).'/../configs/');
         $this->smarty->setCacheDir(dirname(__FILE__).'/../cache/');

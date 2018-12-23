@@ -1,5 +1,6 @@
 <?php
 namespace Model;
+use Repo\UploadRepository;
 
 class User{
 
@@ -15,13 +16,14 @@ class User{
         $this->password = $password;
     }
 
-    public static function CreateWithRow($row)
+    public function getMedia($id = null)
     {
-        $user = new User($row['username'], $row['password_hash']);
-        $user->id = $row['userId'];
-        $user->email = $row['email'];
-        $user->created_at = $row['created_at'];
-        return $user;
-    }
+        $repo = UploadRepository::getInstance();
+        $allUploads = $repo->GetUserUploads($this->id);
 
+        if($id)
+            return $allUploads[$id];
+        else 
+            return $allUploads;
+    }
 }

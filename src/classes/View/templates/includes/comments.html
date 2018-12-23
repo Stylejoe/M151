@@ -1,0 +1,11 @@
+<div>
+        <form method="POST">
+            <textarea name="comment" class="form-control" placeholder="Write something nice!" required></textarea>
+            <input class="btn btn-primary" type="submit" value="Post!" formaction="/home?mediaId={$upload->id}&action=insert">
+        </form>
+        <br>
+        {foreach from=$comments item=comment}
+                <textarea class="form-control" readonly>{$comment->content}</textarea>
+                <br>
+        {/foreach}
+</div>

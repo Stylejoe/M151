@@ -1,0 +1,10 @@
+<h2>Upload new Content</h2>
+            <form enctype="multipart/form-data" method="POST" class="form-group">
+                <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+                <input type="file" name="picture" required>
+    
+                <input type="text" name="title" placeholder="Title" class="form-control" required>
+                <textarea name="description" placeholder="Description" class="form-control" required></textarea> 
+                {include file='message.html'}
+                <input type="submit" name="submit" value="Upload!" formaction="Upload" class="btn btn-primary">
+            </form>

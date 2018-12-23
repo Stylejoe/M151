@@ -16,15 +16,19 @@ class Router
 
     public static function TryRoute($path)
     {
-        if (array_key_exists($path, Router::$Routes)) 
+        if (array_key_exists($path, static::$Routes)) 
         {
             $controller = new static::$Routes[$path]['Controller']();
             $method = static::$Routes[$path]['Method'];
 
-            //Controll if the view needs a login and if the session is already running
+            //check if the view needs a login and if the session is already running
             if($controller->view->needsLogin && !SessionHandler::isLoggedIn())
+            {
                 header('Location: /');
+                return;
+            }
 
+            //call method if available, otherwise show page
             if ($method) 
                 $controller->$method();
             else 
@@ -32,6 +36,7 @@ class Router
         } 
         else 
         {
+            //route does not exist, show error page
             $content = array(
                 'url' => $path,
             );

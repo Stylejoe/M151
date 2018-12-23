@@ -2,6 +2,7 @@
 namespace Controller;
 
 use View\LoginView;
+use App\Application;
 use App\SessionHandler;
 use Repo\UserRepository;
 use Model\User;
@@ -10,15 +11,25 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        $this->view = new LoginView();
+        $this->view = new LoginView($this);
         $this->repository = UserRepository::getInstance();
     }
 
     public function TryLogin()
     {
+        if( Application::GetLoginCount() >= 3)
+        {
+            $this->view->SetContent(array(
+                'message' => "You have tried too many times.
+                 Please try again later"
+            ));
+            $this->view->DisplayPage();
+            return;
+        }
+
         $username; $password;
         $username = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : null;
-        $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
+        $password = isset($_POST['password']) ? $_POST['password'] : null;
 
         $user = $this->repository->GetUserByName($username);
 
@@ -29,6 +40,7 @@ class LoginController extends Controller
             header('Location: /home');
         }         
         else{
+            Application::RegisterAttempt();
             $this->view->SetContent(array(
                 'message' => "Login Failed! Wrong username or password."
             ));

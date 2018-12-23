@@ -6,5 +6,5 @@ use App\TemplateEngine;
 abstract class Controller{
 
     public $view;
-    protected $repository;
+    public $repository;
 }

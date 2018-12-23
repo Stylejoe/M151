@@ -2,11 +2,13 @@
 namespace App;
 use Model\User;
 
-class SessionHandler{
+abstract class SessionHandler{
 
     private static function Refresh()
     {
-        session_start();
+        if(!isset($_SESSION))
+            session_start();
+
         session_regenerate_id(true);
     }
     public static function Login(User $user)
@@ -15,7 +17,7 @@ class SessionHandler{
         $_SESSION['userId'] = $user->id;
     }
 
-    public static function Destroy()
+    public static function Logout()
     {
         static::Refresh();
         session_unset();
@@ -26,6 +28,15 @@ class SessionHandler{
     {
         static::Refresh();
         return (isset($_SESSION['userId']) && !empty($_SESSION['userId']));
+    }
+
+    public static function Get($name)
+    {
+        static::Refresh();
+        if(isset($_SESSION[$name]))
+            return $_SESSION[$name];
+        else
+            return null;
     }
     
     private function __construct()

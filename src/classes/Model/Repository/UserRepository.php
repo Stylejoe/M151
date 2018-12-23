@@ -72,7 +72,7 @@ class UserRepository extends Repository{
             'Select * From '.$this->tableName.' Where userId = :id'
         );
         $sql->execute(array(
-            ':userId' => $id
+            ':id' => $id
         ));
         if($row = $sql->fetch(\PDO::FETCH_ASSOC))
         {
