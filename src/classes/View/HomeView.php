@@ -27,7 +27,7 @@ class HomeView extends View
                 CommentRepository::getInstance()->Insert($comment);
             }
 
-            $upload = $this->controller->allUploads[$mediaId-1];
+            $upload = $this->controller->allUploads[$mediaId];
             $content = array(
                 'uploads' => array($upload),
                 'comments' => $upload->getComments()

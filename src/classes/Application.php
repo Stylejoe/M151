@@ -71,6 +71,7 @@ class Application
 
     public static function RegisterAttempt()
     {
+        //writes the ip adress into the logintable
         $ip = $_SERVER["REMOTE_ADDR"];
         $sql = static::$conn->prepare(
             "INSERT INTO logintable (ip) VALUES (:ip)"
@@ -82,6 +83,8 @@ class Application
 
     public static function GetLoginCount()
     {
+        /*returns the count of the rows with 
+        fitting ip adress from the last 10 minutes*/
         $ip = $_SERVER["REMOTE_ADDR"];
         $sql = static::$conn->prepare(
             "SELECT * FROM logintable 

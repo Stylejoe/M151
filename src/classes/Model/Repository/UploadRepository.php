@@ -59,7 +59,8 @@ class UploadRepository extends Repository{
             'Select * FROM '.$this->tableName.
             ' INNER JOIN '.$userTable.' ON '.
             $this->tableName.'.userId = '.$userTable.'.userId 
-            WHERE '.$this->tableName.'.userId = :userId'
+            WHERE '.$this->tableName.'.userId = :userId
+            ORDER BY '.$this->tableName.'.uploaded_at DESC'
         );
         $sql->execute(array(
             ':userId' => $id
@@ -79,23 +80,6 @@ class UploadRepository extends Repository{
         return $uploads;
     }
 
-    public function GetById($id)
-    {
-        $sql = $this->conn->prepare(
-            'Select * FROM '.$this->tableName.
-            'WHERE mediaId = :mediaId'
-        );
-        $sql->execute(array(
-            ':mediaId' => $id
-        ));
-        $upload = $sql->fetch(\PDO::FETCH_ASSOC);
-
-        $item = new Upload(
-
-        );  
-        return $item;
-    }   
-
     public function SelectAll()
     {
         $uploads = array();
@@ -103,7 +87,8 @@ class UploadRepository extends Repository{
         $sql = $this->conn->prepare(
             'Select * FROM '.$this->tableName.
             ' INNER JOIN '.$userTable.' ON '.
-            $this->tableName.'.userId = '.$userTable.'.userId'
+            $this->tableName.'.userId = '.$userTable.'.userId
+             ORDER BY '.$this->tableName.'.uploaded_at DESC'
         );
         $sql->execute();
         foreach ($sql->fetchAll() as $upload) {
@@ -114,7 +99,7 @@ class UploadRepository extends Repository{
                 $upload['description']
             );
             $item->id = $upload['mediaId'];
-            $uploads[] = $item;
+            $uploads[$item->id] = $item;
         }
         return $uploads;
     }
